@@ -1,27 +1,31 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import * as SiIcons from 'react-icons/si';
 
 /**
  * Tech card component
- * Displays individual skill/technology with icon and description
+ * Displays individual skill/technology with icon and name
  */
 export function TechCard({ skill, index }) {
+  // Get the icon component from react-icons
+  const IconComponent = SiIcons[skill.icon];
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      className="p-6 rounded-lg bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 hover:border-cyan-500/50 transition-all duration-300"
+      whileHover={{ scale: 1.1 }}
+      className="p-4 rounded-lg bg-gray-900/60 border border-gray-800/70 hover:border-cyan-500/50 transition-all duration-300 flex flex-col items-center justify-center gap-2 cursor-pointer group"
     >
-      <div className="text-3xl mb-3">{skill.icon}</div>
-      <h3 className="text-white font-semibold mb-1">{skill.name}</h3>
-      <p className="text-gray-500 text-xs font-medium uppercase tracking-wider mb-2">
-        {skill.category}
-      </p>
-      <p className="text-gray-400 text-sm">{skill.description}</p>
+      {IconComponent ? (
+        <div className={`text-4xl ${skill.color} group-hover:scale-110 transition-transform`}>
+          <IconComponent />
+        </div>
+      ) : (
+        <div className="text-4xl">{skill.icon}</div>
+      )}
+      <h3 className="text-white font-semibold text-center text-xs leading-tight whitespace-nowrap">
+        {skill.name}
+      </h3>
     </motion.div>
   );
 }

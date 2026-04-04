@@ -1,15 +1,59 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState, useEffect } from 'react';
 import { Button } from '@/app/components/common/Button';
-import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiExpress } from 'react-icons/si';
+import {
+  SiReact,
+  SiNodedotjs,
+  SiMongodb,
+  SiTailwindcss,
+  SiExpress,
+} from 'react-icons/si';
 
 /**
  * Hero Section
  * Opening section with name, title, tagline, and CTA buttons
  */
 export function Hero() {
+  const roles = ['MERN Stack Developer', 'Full Stack Developer', 'Software Developer'];
+  const [displayText, setDisplayText] = useState('');
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && charIndex < currentRole.length) {
+      // Typing
+      timeout = setTimeout(() => {
+        setDisplayText(currentRole.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, 50);
+    } else if (isDeleting && charIndex > 0) {
+      // Deleting
+      timeout = setTimeout(() => {
+        setDisplayText(currentRole.slice(0, charIndex - 1));
+        setCharIndex(charIndex - 1);
+      }, 30);
+    } else if (!isDeleting && charIndex === currentRole.length) {
+      // Pause before deleting
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000);
+    } else if (isDeleting && charIndex === 0) {
+      // Move to next role
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+      setCharIndex(0);
+      setDisplayText('');
+    }
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, roleIndex, roles]);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,56 +70,59 @@ export function Hero() {
   const scrollToSection = (sectionId) => {
     const element = document.querySelector(`#${sectionId}`);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const techStack = [
-    { 
-      icon: SiReact, 
-      label: 'React', 
-      color: 'text-cyan-400',
-      bgColor: 'bg-cyan-400/10'
+    {
+      icon: SiReact,
+      label: "React",
+      color: "text-cyan-400",
+      bgColor: "bg-cyan-400/10",
     },
-    { 
-      icon: SiNodedotjs, 
-      label: 'Node.js', 
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10'
+    {
+      icon: SiNodedotjs,
+      label: "Node.js",
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
     },
-    { 
-      icon: SiMongodb, 
-      label: 'MongoDB', 
-      color: 'text-green-600',
-      bgColor: 'bg-green-600/10'
+    {
+      icon: SiMongodb,
+      label: "MongoDB",
+      color: "text-green-600",
+      bgColor: "bg-green-600/10",
     },
-    { 
-      icon: SiTailwindcss, 
-      label: 'Tailwind CSS', 
-      color: 'text-cyan-500',
-      bgColor: 'bg-cyan-500/10'
+    {
+      icon: SiTailwindcss,
+      label: "Tailwind CSS",
+      color: "text-cyan-500",
+      bgColor: "bg-cyan-500/10",
     },
-    { 
-      icon: SiExpress, 
-      label: 'Express.js', 
-      color: 'text-gray-300',
-      bgColor: 'bg-gray-300/10'
+    {
+      icon: SiExpress,
+      label: "Express.js",
+      color: "text-gray-300",
+      bgColor: "bg-gray-300/10",
     },
   ];
 
   return (
-    <section id="home" className="min-h-screen flex items-center relative overflow-hidden pt-20">
+    <section
+      id="home"
+      className="min-h-screen flex items-center relative overflow-x-hidden pt-20"
+    >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="hidden sm:block absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="hidden sm:block absolute bottom-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 sm:py-20 relative z-10 w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full overflow-hidden"
         >
           {/* Content */}
           <motion.div variants={itemVariants}>
@@ -91,21 +138,26 @@ export function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-white">Hi, I'm </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-                Faizan Pervez
-              </span>   
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold mb-6"
+            >
+              <span className="text-white whitespace-nowrap">Hi, I'm </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 whitespace-nowrap">Faizan Pervez</span>
               <span className="text-white"> — </span>
-              <span className="block text-3xl md:text-5xl text-white mt-2">MERN Stack Developer</span>
+              <span className="block text-3xl md:text-4xl text-white mt-4 min-h-[2.5rem] md:min-h-[3.5rem]">
+                {displayText}
+                <span className="animate-pulse">|</span>
+              </span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-gray-400 text-lg md:text-xl mb-8 leading-relaxed max-w-xl"
             >
-              Crafting high-performance, scalable full-stack applications with a focus on seamless 
-              user experiences and robust architecture. Let's build something extraordinary together.
+              I build high-performance, scalable full-stack applications with a
+              focus on seamless user experiences and robust architecture. Let's
+              build something extraordinary together.
             </motion.p>
 
             {/* Tech Stack Icons */}
@@ -123,7 +175,7 @@ export function Hero() {
                     key={tech.label}
                     whileHover={{
                       scale: 1.2,
-                      filter: 'drop-shadow(0 0 12px rgba(6, 182, 212, 0.8))',
+                      filter: "drop-shadow(0 0 12px rgba(6, 182, 212, 0.8))",
                     }}
                     whileTap={{ scale: 0.95 }}
                     className={`p-3 rounded-lg ${tech.bgColor} cursor-pointer group relative transition-all duration-300 hover:${tech.bgColor}`}
@@ -149,14 +201,14 @@ export function Hero() {
               <Button
                 variant="primary"
                 size="lg"
-                onClick={() => scrollToSection('projects')}
+                onClick={() => scrollToSection("projects")}
               >
                 View Projects
               </Button>
               <Button
                 variant="secondary"
                 size="lg"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
               >
                 Hire Me
               </Button>
@@ -172,7 +224,7 @@ export function Hero() {
                 <p className="text-gray-500 text-sm mt-2">Years Experience</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-cyan-500">50+</div>
+                <div className="text-3xl font-bold text-cyan-500">20+</div>
                 <p className="text-gray-500 text-sm mt-2">Projects Delivered</p>
               </div>
             </motion.div>
@@ -181,37 +233,37 @@ export function Hero() {
           {/* Image/Avatar Area */}
           <motion.div
             variants={itemVariants}
-            className="relative h-96 md:h-full min-h-96"
+            className="relative h-auto w-full flex justify-center items-start mt-8 lg:mt-0 overflow-hidden"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="h-full bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-2xl border border-gray-800 overflow-hidden relative"
+              className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
             >
               {/* Profile Image */}
               <Image
                 src="/faizan-img.jpg"
                 alt="Faizan Pervez"
-                fill
-                className="object-cover"
+                width={400}
+                height={500}
+                className="w-full h-auto rounded-2xl shadow-2xl"
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
               />
-              
+
               {/* Overlay gradient for better text contrast if needed */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/20 to-transparent rounded-2xl" />
             </motion.div>
 
-            {/* Decorative elements */}
+            {/* Decorative elements - hidden on mobile */}
             <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/10 rounded-lg blur-2xl"
+              className="hidden sm:block absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/10 rounded-lg blur-2xl"
             />
             <motion.div
               animate={{ x: [0, 10, 0] }}
               transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-              className="absolute -top-6 -right-6 w-40 h-40 bg-blue-500/10 rounded-lg blur-2xl"
+              className="hidden sm:block absolute -top-6 -right-6 w-40 h-40 bg-blue-500/10 rounded-lg blur-2xl"
             />
           </motion.div>
         </motion.div>
@@ -224,7 +276,9 @@ export function Hero() {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-gray-600 text-xs uppercase tracking-wider">Scroll to explore</span>
+          <span className="text-gray-600 text-xs uppercase tracking-wider">
+            Scroll to explore
+          </span>
           <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
             <motion.div
               animate={{ y: [0, 8, 0] }}
