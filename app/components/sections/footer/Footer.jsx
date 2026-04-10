@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { GitHubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@/app/components/icons/SocialIcons';
 
 /**
  * Footer Component
@@ -10,10 +11,10 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const links = [
-    { label: 'GitHub', url: 'https://github.com' },
-    { label: 'LinkedIn', url: 'https://linkedin.com' },
-    { label: 'Twitter', url: 'https://twitter.com' },
-    { label: 'Email', url: 'mailto:hello@faizanpervez.dev' },
+    { Icon: GitHubIcon, label: 'GitHub', url: 'https://github.com/faizanpervez03' },
+    { Icon: LinkedInIcon, label: 'LinkedIn', url: 'https://www.linkedin.com/in/faizan-pervez' },
+    { Icon: TwitterIcon, label: 'X', url: 'https://twitter.com/FaizanPervez11?t=a7XxF3Sj8nqWeAGgAyqqAA&s=09' },
+    { Icon: EmailIcon, label: 'Email', url: 'mailto:faizanpervez005@gmail.com' },
   ];
 
   return (
@@ -39,7 +40,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
               Quick Links
             </h4>
-            <div className="space-y-2">
+            <div className="space-y-1">
               {[
                 { label: 'Home', href: '#home' },
                 { label: 'About', href: '#about' },
@@ -49,7 +50,7 @@ export function Footer() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-gray-500 hover:text-cyan-400 transition-colors text-sm"
+                  className=" px-2 py-2 rounded text-gray-500 hover:text-cyan-400 hover:bg-gray-800/50 transition-colors text-sm"
                 >
                   {link.label}
                 </a>
@@ -63,20 +64,23 @@ export function Footer() {
               Connect
             </h4>
             <div className="flex gap-3">
-              {links.map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-sm font-semibold text-gray-400 hover:text-cyan-400"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  title={link.label}
-                >
-                  {link.label.charAt(0)}
-                </motion.a>
-              ))}
+              {links.map((link) => {
+                const IconComponent = link.Icon;
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-cyan-400"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    title={link.label}
+                  >
+                    <IconComponent className="w-5 h-5" />
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
         </motion.div>
@@ -87,10 +91,13 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-12 pt-8 border-t border-gray-800 flex items-center justify-between text-sm text-gray-500"
+          className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-gray-500"
         >
           <p>© {currentYear} Faizan Pervez. Crafted in Code.</p>
-          <div className="flex gap-6">
+          <div className="flex gap-6 flex-wrap justify-center">
+            <a href="mailto:faizanpervez005@gmail.com" className="hover:text-cyan-400 transition-colors">
+              📧 faizanpervez005@gmail.com
+            </a>
             <a href="#" className="hover:text-cyan-400 transition-colors">
               Privacy
             </a>

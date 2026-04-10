@@ -58,6 +58,11 @@ export function Navigation() {
     }
   };
 
+  const downloadCV = () => {
+    // Open CV in a new tab so user can view and download it
+    window.open('/cv/Faizan%20Pervez%20Cv.pdf', '_blank');
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -99,7 +104,7 @@ export function Navigation() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => handleNavClick('#contact')}
+              onClick={downloadCV}
               className="hidden sm:inline-flex"
             >
               Download CV
@@ -156,7 +161,7 @@ export function Navigation() {
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => handleNavClick('#contact')}
+                onClick={downloadCV}
                 className="w-full"
               >
                 Download CV

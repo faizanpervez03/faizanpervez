@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionHeader } from '@/app/components/common/SectionHeader';
 import { ContactForm } from '@/app/components/forms/ContactForm';
+import { GitHubIcon, LinkedInIcon, TwitterIcon, FacebookIcon, InstagramIcon } from '@/app/components/icons/SocialIcons';
 
 /**
  * Contact Section
@@ -12,19 +13,21 @@ export function Contact() {
   const contactInfo = [
     {
       label: 'Email',
-      value: 'hello@faizanpervez.dev',
-      link: 'mailto:hello@faizanpervez.dev',
+      value: 'faizanpervez005@gmail.com',
+      link: 'mailto:faizanpervez005@gmail.com',
     },
     {
       label: 'Location',
-      value: 'Remote / Global',
+      value: 'Peshawar, Pakistan',
     },
   ];
 
   const socialLinks = [
-    { icon: '🐙', label: 'GitHub', url: 'https://github.com' },
-    { icon: '💼', label: 'LinkedIn', url: 'https://linkedin.com' },
-    { icon: '𝕏', label: 'Twitter', url: 'https://twitter.com' },
+    { Icon: GitHubIcon, label: 'GitHub', url: 'https://github.com/faizanpervez03' },
+    { Icon: LinkedInIcon, label: 'LinkedIn', url: 'https://www.linkedin.com/in/faizan-pervez' },
+    { Icon: TwitterIcon, label: 'X', url: 'https://twitter.com/FaizanPervez11?t=a7XxF3Sj8nqWeAGgAyqqAA&s=09' },
+    { Icon: FacebookIcon, label: 'Facebook', url: 'https://www.facebook.com/faizan.khani.7?mibextid=ZbWKwL' },
+    { Icon: InstagramIcon, label: 'Instagram', url: 'https://instagram.com/faizanpervez003?igshid=MmVlMjlkMTBhMg==' },
   ];
 
   return (
@@ -73,20 +76,23 @@ export function Contact() {
                 Social
               </p>
               <div className="flex gap-4">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center text-xl hover:border-cyan-500 hover:bg-cyan-500/10 transition-all"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    title={social.label}
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
+                {socialLinks.map((social) => {
+                  const IconComponent = social.Icon;
+                  return (
+                    <motion.a
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-lg bg-gray-900 border border-gray-800 flex items-center justify-center hover:border-cyan-500 hover:bg-cyan-500/10 transition-all text-cyan-400"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      title={social.label}
+                    >
+                      <IconComponent className="w-6 h-6" />
+                    </motion.a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

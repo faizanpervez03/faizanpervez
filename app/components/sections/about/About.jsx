@@ -16,7 +16,7 @@ export function About() {
     },
     {
       label: 'Projects Completed',
-      value: '50+',
+      value: '15+',
     },
   ];
 
@@ -39,8 +39,8 @@ export function About() {
         {/* Section Header */}
         <SectionHeader
           number="01 DISCOVERY"
-          title="Engineering with Precision"
-          description="With over 3 years of hands-on experience in the MERN ecosystem, I specialize in transforming complex business requirements into elegant, high-performance digital solutions."
+          title="Full-Stack Developer"
+          description="I build modern, high-impact digital solutions using the MERN stack combined with AI integration. Focused on creating scalable applications that deliver real results."
         />
 
         {/* Content Grid */}
@@ -55,13 +55,10 @@ export function About() {
           <motion.div variants={itemVariants} className="space-y-6">
             <div className="space-y-4">
               <p className="text-gray-400 leading-relaxed text-lg">
-                My approach combines rigid technical architecture with fluid user interface design. 
-                I don't just write code; I build systems that scale alongside your growth.
+                I'm a Full-Stack Software Developer specializing in MERN stack development with expertise in AI integration and modern web design. With hands-on experience building scalable, high-performance applications, I focus on transforming complex business requirements into elegant digital solutions.
               </p>
               <p className="text-gray-400 leading-relaxed text-lg">
-                From architecting database schemas to crafting pixel-perfect frontends, I ensure 
-                every layer of your application is optimized for performance, maintainability, and 
-                user satisfaction.
+                I work extensively with <span className="text-cyan-400">React.js</span>, <span className="text-cyan-400">Next.js</span>, <span className="text-cyan-400">Node.js</span>, and <span className="text-cyan-400">Express.js</span> to build efficient, maintainable systems. My approach combines solid technical architecture with beautiful user interfaces—ensuring every layer of your application is optimized for performance, scalability, and user satisfaction.
               </p>
             </div>
 

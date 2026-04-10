@@ -117,12 +117,12 @@ export function Hero() {
       <div className="hidden sm:block absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="hidden sm:block absolute bottom-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 sm:py-20 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 relative z-10 w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full overflow-hidden"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-12 items-center w-full overflow-hidden"
         >
           {/* Content */}
           <motion.div variants={itemVariants}>
@@ -140,20 +140,20 @@ export function Hero() {
 
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-bold mb-6"
             >
-              <span className="text-white whitespace-nowrap">Hi, I'm </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 whitespace-nowrap">Faizan Pervez</span>
-              <span className="text-white"> — </span>
-              <span className="block text-3xl md:text-4xl text-white mt-4 min-h-[2.5rem] md:min-h-[3.5rem]">
+              <span className="text-white">Hi, I'm </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Faizan Pervez</span>
+              <span className="text-white"> </span>
+              <div className="block text-xl sm:text-2xl md:text-4xl text-white mt-4 min-h-[2rem] sm:min-h-[2.5rem] md:min-h-[3.5rem]">
                 {displayText}
                 <span className="animate-pulse">|</span>
-              </span>
+              </div>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="text-gray-400 text-lg md:text-xl mb-8 leading-relaxed max-w-xl"
+              className="text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl mb-8 leading-relaxed max-w-xl"
             >
               I build high-performance, scalable full-stack applications with a
               focus on seamless user experiences and robust architecture. Let's
@@ -215,7 +215,7 @@ export function Hero() {
             </motion.div>
 
             {/* Stats */}
-            <motion.div
+            {/* <motion.div
               variants={itemVariants}
               className="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-gray-800"
             >
@@ -224,10 +224,10 @@ export function Hero() {
                 <p className="text-gray-500 text-sm mt-2">Years Experience</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-cyan-500">20+</div>
+                <div className="text-3xl font-bold text-cyan-500">15+</div>
                 <p className="text-gray-500 text-sm mt-2">Projects Delivered</p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Image/Avatar Area */}
@@ -241,14 +241,17 @@ export function Hero() {
               className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg overflow-hidden"
             >
               {/* Profile Image */}
-              <Image
-                src="/faizan-img.jpg"
-                alt="Faizan Pervez"
-                width={400}
-                height={500}
-                className="w-full h-auto rounded-2xl shadow-2xl"
-                priority
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src="/faizan-pervez.jpg"
+                  alt="Faizan Pervez"
+                  width={400}
+                  height={500}
+                  priority
+                  quality={90}
+                  className="w-full h-auto rounded-2xl shadow-2xl"
+                />
+              </div>
 
               {/* Overlay gradient for better text contrast if needed */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-950/20 to-transparent rounded-2xl" />

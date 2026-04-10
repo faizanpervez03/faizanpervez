@@ -6,7 +6,7 @@ import { TechStack } from '@/app/components/sections/tech-stack/TechStack';
 import { Projects } from '@/app/components/sections/projects/Projects';
 import { Experience } from '@/app/components/sections/experience/Experience';
 import { Testimonials } from '@/app/components/sections/testimonials/Testimonials';
-import { Contact } from '@/app/components/sections/contact/Contact';
+import { Contact } from '@/app/sections/contact/Contact';
 
 /**
  * Homepage

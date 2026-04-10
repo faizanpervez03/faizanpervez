@@ -34,11 +34,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
-  swcMinify: true,
-  optimizeFonts: true,
-  optimizePackageImports: [
-    'framer-motion',
-  ],
 
   // Security & Caching headers
   headers: async () => {

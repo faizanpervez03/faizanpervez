@@ -35,12 +35,17 @@ export function ContactForm() {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.error || 'Failed to send message');
+      }
 
       setSubmitStatus('success');
       reset();
       setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
@@ -80,7 +85,7 @@ export function ContactForm() {
           {...register('name')}
           type="text"
           id="name"
-          placeholder="John Doe"
+          placeholder="Your Name"
           className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
         />
         {errors.name && (
@@ -97,7 +102,7 @@ export function ContactForm() {
           {...register('email')}
           type="email"
           id="email"
-          placeholder="john@example.com"
+          placeholder="your.email@example.com"
           className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
         />
         {errors.email && (

@@ -242,7 +242,7 @@ export function Hero() {
             >
               {/* Profile Image */}
               <Image
-                src="/faizan-img.jpg"
+                src="/faizan-pervez.jpg"
                 alt="Faizan Pervez"
                 width={400}
                 height={500}
