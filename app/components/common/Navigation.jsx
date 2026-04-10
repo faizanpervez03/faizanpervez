@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { Button } from './Button';
 import { HiMenu, HiX } from 'react-icons/hi';
 
@@ -11,6 +12,8 @@ import { HiMenu, HiX } from 'react-icons/hi';
  * Includes smooth animations and mobile-responsive design
  */
 export function Navigation() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -32,22 +35,27 @@ export function Navigation() {
     { label: 'Contact', href: '#contact' },
   ];
 
-  const scrollToSection = (href) => {
+  const handleNavClick = (href) => {
     // Close menu immediately
     setIsOpen(false);
-    
-    // Then scroll after a brief delay to allow menu to close
-    setTimeout(() => {
-      const id = href.replace('#', '');
-      const element = document.getElementById(id);
-      
-      if (element) {
-        element.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }, 300);
+
+    const id = href.replace('#', '');
+
+    // If on home page, just scroll to section
+    if (pathname === '/') {
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 300);
+    } else {
+      // If on other page, navigate to home with anchor
+      router.push(`/#${id}`);
+    }
   };
 
   return (
@@ -77,7 +85,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <motion.button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavClick(item.href)}
                 className="text-gray-400 hover:text-cyan-500 transition-colors text-sm font-medium uppercase tracking-wider"
                 whileHover={{ color: '#06b6d4' }}
               >
@@ -91,7 +99,7 @@ export function Navigation() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => handleNavClick('#contact')}
               className="hidden sm:inline-flex"
             >
               Download CV
@@ -99,7 +107,7 @@ export function Navigation() {
             <Button
               variant="primary"
               size="sm"
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => handleNavClick('#contact')}
               className="hidden sm:inline-flex"
             >
               Hire Me
@@ -138,7 +146,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavClick(item.href)}
                 className="block w-full text-left px-4 py-3 text-gray-400 hover:text-cyan-500 hover:bg-gray-800/50 rounded transition-colors text-sm font-medium uppercase tracking-wider cursor-pointer"
               >
                 {item.label}
@@ -148,7 +156,7 @@ export function Navigation() {
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => handleNavClick('#contact')}
                 className="w-full"
               >
                 Download CV
@@ -156,7 +164,7 @@ export function Navigation() {
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => handleNavClick('#contact')}
                 className="w-full"
               >
                 Hire Me

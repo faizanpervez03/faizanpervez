@@ -1,12 +1,12 @@
 'use client';
 
-import { Hero } from '@/app/sections/hero/Hero';
-import { About } from '@/app/sections/about/About';
-import { TechStack } from '@/app/sections/tech-stack/TechStack';
-import { Projects } from '@/app/sections/projects/Projects';
-import { Experience } from '@/app/sections/experience/Experience';
-import { Testimonials } from '@/app/sections/testimonials/Testimonials';
-import { Contact } from '@/app/sections/contact/Contact';
+import { Hero } from '@/app/components/sections/hero/Hero';
+import { About } from '@/app/components/sections/about/About';
+import { TechStack } from '@/app/components/sections/tech-stack/TechStack';
+import { Projects } from '@/app/components/sections/projects/Projects';
+import { Experience } from '@/app/components/sections/experience/Experience';
+import { Testimonials } from '@/app/components/sections/testimonials/Testimonials';
+import { Contact } from '@/app/components/sections/contact/Contact';
 
 /**
  * Homepage

@@ -20,9 +20,18 @@ export function ProjectCard({ project, index }) {
     >
       {/* Image Container */}
       <div className="relative h-64 overflow-hidden bg-gray-800">
-        <div className="w-full h-full bg-gradient-to-br from-cyan-600/20 to-blue-600/20 flex items-center justify-center text-gray-600">
-          {project.title}
-        </div>
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-cyan-600/20 to-blue-600/20 flex items-center justify-center text-gray-600">
+            {project.title}
+          </div>
+        )}
       </div>
 
       {/* Content */}

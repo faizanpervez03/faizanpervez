@@ -1,16 +1,20 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/app/components/common/Navigation";
-import { Footer } from "@/app/sections/footer/Footer";
+import { Footer } from "@/app/components/sections/footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata = {
@@ -67,8 +71,9 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#000000" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.vercel.com" />
       </head>
-      <body className="bg-gray-950 text-white overflow-x-hidden antialiased">
+      <body className="bg-gray-950 text-white overflow-x-hidden antialiased" suppressHydrationWarning>
         <Navigation />
         <main className="flex-1">
           {children}
